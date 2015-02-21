@@ -3,9 +3,14 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	public float speed;
-	// Use this for initialization
-	void Start () {
-	
+	public GUIText countText;
+	public GUIText winText;
+	private int count;
+
+	void Start(){
+		count = 0;
+		SetCountText ();
+		winText.text = "";
 	}
 
 	void FixedUpdate () {
@@ -19,7 +24,19 @@ public class PlayerController : MonoBehaviour {
 
 	}
 	// Update is called once per frame
-	void Update () {
-	
+
+	void OnTriggerEnter(Collider other) {
+		if (other.gameObject.tag == "PickUp") {
+			other.gameObject.SetActive(false);
+			count = count+1;
+			SetCountText ();
+		}
+	}
+	void SetCountText() {
+		countText.text = "Count: " + count.ToString ();
+		if (count == 8) {
+			winText.text = "YOU WON!!!";
+			countText.text = "";
+		}
 	}
 }
