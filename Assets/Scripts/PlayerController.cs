@@ -19,14 +19,26 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
+		//Android Release
+		//transform.Translate ((Input.acceleration.x / 2) , 0, (-Input.acceleration.z / 2));
+		//Computer release
+		//float moveHorizontal = Input.GetAxis ("Horizontal");
+		//float moveVertical = Input.GetAxis ("Vertical");
 
-		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical); //X Y Z
+		//Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical); //X Y Z
 
-		rigidbody.AddForce (movement * speed * Time.deltaTime);
-
-
+		//rigidbody.AddForce (movement * speed * Time.deltaTime);
+		if (SystemInfo.deviceType == DeviceType.Desktop) {
+			float moveHorizontal = Input.GetAxis ("Horizontal");
+			float moveVertical = Input.GetAxis ("Vertical");
+			Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+			rigidbody.AddForce (movement * speed * Time.deltaTime);
+		} else {
+			float moveHorizontal = Input.acceleration.x;
+			float moveVertical = Input.acceleration.y;
+			Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+			rigidbody.AddForce (movement * speed * Time.deltaTime);
+		}
 	}
 	// Update is called once per frame
 
