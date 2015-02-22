@@ -7,6 +7,6 @@ public class SS01 : MonoBehaviour {
 	IEnumerator Start() {
 		yield return new WaitForSeconds (delayTime);
 		
-		Application.LoadLevel ("SplashScreen2");
+		Application.LoadLevel ("SplashScreen02");
 	}
 }

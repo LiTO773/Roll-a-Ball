@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour {
 	public GUIText instructions;
 	private int count;
 
+	public AudioClip collect;
+	public AudioClip win;
+
 	void Start(){
 		instructions.text = "Try to catch all the cubes!";
 		count = 0;
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "PickUp") {
 			other.gameObject.SetActive(false);
+			collectSound ();
 			count = count+1;
 			SetCountText ();
 		}
@@ -40,8 +44,19 @@ public class PlayerController : MonoBehaviour {
 	void SetCountText() {
 		countText.text = "Count: " + count.ToString ();
 		if (count == 8) {
+			winSound();
 			winText.text = "YOU WIN!!!";
 			countText.text = "";
 		}
+	}
+
+	void collectSound() {
+		audio.clip = collect;
+		audio.Play ();
+	}
+
+	void winSound () {
+		audio.clip = win;
+		audio.Play ();
 	}
 }
