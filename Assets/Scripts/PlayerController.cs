@@ -6,16 +6,18 @@ public class PlayerController : MonoBehaviour {
 	public GUIText countText;
 	public GUIText winText;
 	public GUIText instructions;
+	public GUITexture gg;
 	private int count;
 
 	public AudioClip collect;
 	public AudioClip win;
 
 	void Start(){
-		instructions.text = "Try to catch all the cubes!";
+		instructions.text = "Make cubes get #REKT";
 		count = 0;
 		SetCountText ();
 		winText.text = "";
+		gg.enabled = false;
 	}
 
 	void FixedUpdate () {
@@ -54,10 +56,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 	void SetCountText() {
-		countText.text = "Count: " + count.ToString ();
+		countText.text = "Sample Text: " + count.ToString ();
 		if (count == 8) {
+			gg.enabled = true;
 			winSound();
-			winText.text = "YOU WIN!!!";
+			winText.text = "GG MANOS!!!";
 			countText.text = "";
 		}
 	}
