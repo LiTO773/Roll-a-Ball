@@ -5,9 +5,11 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public GUIText countText;
 	public GUIText winText;
+	public GUIText instructions;
 	private int count;
 
 	void Start(){
+		instructions.text = "Try to catch all the cubes!";
 		count = 0;
 		SetCountText ();
 		winText.text = "";
@@ -26,6 +28,9 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 
 	void OnTriggerEnter(Collider other) {
+		if (count >= 1) {
+			instructions.text = "";
+		}
 		if (other.gameObject.tag == "PickUp") {
 			other.gameObject.SetActive(false);
 			count = count+1;
@@ -35,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 	void SetCountText() {
 		countText.text = "Count: " + count.ToString ();
 		if (count == 8) {
-			winText.text = "YOU WON!!!";
+			winText.text = "YOU WIN!!!";
 			countText.text = "";
 		}
 	}
